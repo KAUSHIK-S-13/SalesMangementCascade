@@ -125,6 +125,13 @@ public class UserServiceImpl implements UserInterface {
             BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
             existUser.get().setPassword(bcrypt.encode(userDTO.getPassword()));
             userRepository.save(existUser.get());
+            List<Role> roleList=new LinkedList<>();
+            userDTO.getRoles().stream().forEachOrdered(role -> {
+                Role role1=new Role();
+                role1.setRoleName(role.getRoleName());
+                roleList.add(role1);
+            });
+            existUser.get().setListofrole(roleList);
         } else {
             throw new CustomException("404","Not Found");
         }
