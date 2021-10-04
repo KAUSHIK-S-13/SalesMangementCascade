@@ -16,6 +16,6 @@ public class UserRoleDTO {
 
     private String password;
 
-    /*private List<UserRole> roleList;*/
+   
 
 }
