@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserInterface {
         user.setName(userDTO.getName());
         BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
         user.setPassword(bcrypt.encode(userDTO.getPassword()));
-        user=userRepository.save(user);
         List<Role> roleList=new LinkedList<>();
         userDTO.getRoles().stream().forEachOrdered(role -> {
             Role role1=new Role();
@@ -48,7 +47,7 @@ public class UserServiceImpl implements UserInterface {
             roleList.add(role1);
         });
         user.setListofrole(roleList);
-
+        user=userRepository.save(user);
         return user;
     }
 
