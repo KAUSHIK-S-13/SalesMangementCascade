@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserInterface {
             existUser.get().setPassword(bcrypt.encode(userDTO.getPassword()));
             List<Role> roleList=new LinkedList<>();
             userDTO.getRoles().stream().forEachOrdered(role -> {
-                Role role1=new Role();
+                Role role1=roleRepository.findById(role.getId()).orElse(null);
                 role1.setRoleName(role.getRoleName());
                 roleList.add(role1);
             });
