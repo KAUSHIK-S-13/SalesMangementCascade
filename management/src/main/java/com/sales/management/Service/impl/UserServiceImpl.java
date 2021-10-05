@@ -123,7 +123,6 @@ public class UserServiceImpl implements UserInterface {
             existUser.get().setName(userDTO.getName());
             BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
             existUser.get().setPassword(bcrypt.encode(userDTO.getPassword()));
-            userRepository.save(existUser.get());
             List<Role> roleList=new LinkedList<>();
             userDTO.getRoles().stream().forEachOrdered(role -> {
                 Role role1=new Role();
@@ -131,10 +130,10 @@ public class UserServiceImpl implements UserInterface {
                 roleList.add(role1);
             });
             existUser.get().setListofrole(roleList);
+            userRepository.save(existUser.get());
         } else {
             throw new CustomException("404","Not Found");
         }
-
         return existUser;
     }
 
